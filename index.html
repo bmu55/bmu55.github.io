@@ -33,7 +33,7 @@
                     </select><input type="text" name="zip10" class="form-control" placeholder="ZIP code, Address"
                                     style=" width: 70%"></div>
                 </div>
-                <div class="data-pa" id="parcel_0" style="display: block;"><input name="trigger_0" type="hidden" value="true">
+                <div class="data-pa" id="parcel_0" style="display: block;"><input name="trigger_0" type="hidden" value="Parcel">
                     <div class="data-items">
                         <div class="btn-group dop2" onclick="fnSetPallet(0)"><span class="btn btn-primary">PARCEL</span><span
                                 class="btn btn-default">&nbsp;</span></div>
@@ -86,7 +86,7 @@
 </div>
 <!--Template-->
 <div class="template" style="display: none;"><div class="section-data">
-  <div class="data-pa" id="parcel_=@=" style="display: none;"><input name="trigger_=@=" type="hidden" value="false">
+  <div class="data-pa" id="parcel_=@=" style="display: none;"><input name="trigger_=@=" type="hidden" value="Pallet">
     <div class="data-items">
         <div class="btn-group dop2" onclick="fnSetPallet(=@=)"><span class="btn btn-primary">PARCEL</span><span
                 class="btn btn-default">&nbsp;</span></div>
@@ -129,8 +129,8 @@
 </div><!--End template-->
 <script src="js/callsoft.js"></script>
 <script>
-    var arr = [true,false,false];
-    for (var i=1; i<arr.length; i++){
+    var idx = 3;
+    for (var i=1; i < idx; i++){
         fnShowRow(i);
     }
 
