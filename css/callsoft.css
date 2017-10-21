@@ -1,0 +1,96 @@
+body {
+    background: #0e90d2;
+    padding-top: 20px;
+}
+
+.command {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.section-data {
+    border-radius: 10px;
+    background: #fff;
+    margin-bottom: 4px;
+    width: 100%;
+    padding: 10px;
+}
+.data-country {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.data-pa, .data-country {
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.data-items {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.data-item {
+    width: 100px;
+    position: relative;
+    margin-top: 30px;
+}
+.data-item-span {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-weight: bold;
+}
+.dop {
+    left: -10px;
+    width: 150px;
+}
+.dop2 {
+    top: 15px;
+    margin-bottom: 5px;
+}
+@media (max-width: 660px) {
+    .data-country {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+}
+@media (max-width: 570px) {
+    .data-items {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CallSoft</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/callsoft.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <form action="javascript:SendData();" name="f1">
+        <div id="main-con">
+            <div class="section-data">
+                <div class="data-country">
+                    <div class="input-group"><select class="form-control btn-primary" name="country00" style=" width: 30%">
+                        <option value="Belgium">Belgium</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Austria">Austria</option>
+                    </select><input type="text" name="zip00" class="form-control" placeholder="ZIP code, Address"
+                                    style="width: 70%"></div>
+                    <div class="input-group"><select class="form-control btn-primary" name="country10" style="width: 30%">
+                        <option value="Belgium">Belgium</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Austria">Austria</option>
+                    </select><input type="text" name="zip10" class="form-control" placeholder="ZIP code, Address"
+                                    style=" width: 70%"></div>
+                </div>
+                <div class="data-pa" id="parcel_0" style="display: block;"><input name="trigger_0" type="hidden" value="true">
+                    <div class="data-items">
+                        <div class="btn-group dop2" onclick="fnSetPallet(0)"><span class="btn btn-primary">PARCEL</span><span
+                                class="btn btn-default">&nbsp;</span></div>
+                        <div class="data-item"><span class="data-item-span">Weight:</span>
+                            <div class="input-group"><input type="text" class="form-control" name="we_parcel_0"><span
+                                    class="input-group-addon">Kg</span></div>
+                        </div>
+                        <div class="data-item"><span class="data-item-span">Length:</span>
+                            <div class="input-group"><input type="text" class="form-control" name="l_parcel_0"><span
+                                    class="input-group-addon">Cm</span></div>
+                        </div>
+                        <div class="data-item"><span class="data-item-span">Width:</span>
+                            <div class="input-group"><input type="text" class="form-control" name="wi_parcel_0"><span
+                                    class="input-group-addon">Cm</span></div>
+                        </div>
+                        <div class="data-item"><span class="data-item-span">Height:</span>
+                            <div class="input-group"><input type="text" class="form-control" name="h_parcel_0"><span
+                                    class="input-group-addon">Cm</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-pa" id="pallet_0" style="display: none;">
+                    <div class="data-items">
+                        <div class="btn-group dop2" onclick="fnSetParcel(0)"><span class="btn btn-default">&nbsp;</span><span
+                                class="btn btn-primary">PALLET</span></div>
+                        <div class="data-item"><span class="data-item-span dop">Number of pallets:</span>
+                            <div class="input-group"><input type="text" class="form-control" name="n_pallet_0"><span
+                                    class="input-group-addon">Pcs</span></div>
+                        </div>
+                        <div class="data-item"><span class="data-item-span">Height:</span>
+                            <div class="input-group"><input type="text" class="form-control" name="h_pallet_0"><span
+                                    class="input-group-addon">Cm</span></div>
+                        </div>
+                        <div class="data-item"><span class="data-item-span dop">Weight for pallet:</span>
+                            <div class="input-group"><input type="text" class="form-control" name="w_pallet_0"><span
+                                    class="input-group-addon">Cm</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end section_0-->
+        </div>
+        <div class="command">
+            <div class="command-left"><span class="btn btn-primary" onclick="fnDel()">- Remove</span>
+                <span class="btn btn-primary" onclick="fnAdd()">+ Add parcel or pallet</span></div>
+            <div class="command-right">
+                <button type="submit" class="btn btn-danger">Quote & Book</button>
+            </div>
+      </div>
+    </form>
+</div>
+<!--Template-->
+<div class="template" style="display: none;"><div class="section-data">
+  <div class="data-pa" id="parcel_=@=" style="display: none;"><input name="trigger_=@=" type="hidden" value="true">
+    <div class="data-items">
+        <div class="btn-group dop2" onclick="fnSetPallet(=@=)"><span class="btn btn-primary">PARCEL</span><span
+                class="btn btn-default">&nbsp;</span></div>
+        <div class="data-item"><span class="data-item-span">Weight:</span>
+            <div class="input-group"><input type="text" class="form-control" name="we_parcel_=@="><span
+                    class="input-group-addon">Kg</span></div>
+        </div>
+        <div class="data-item"><span class="data-item-span">Length:</span>
+            <div class="input-group"><input type="text" class="form-control" name="l_parcel_=@="><span
+                    class="input-group-addon">Cm</span></div>
+        </div>
+        <div class="data-item"><span class="data-item-span">Width:</span>
+            <div class="input-group"><input type="text" class="form-control" name="wi_parcel_=@="><span
+                    class="input-group-addon">Cm</span></div>
+        </div>
+        <div class="data-item"><span class="data-item-span">Height:</span>
+            <div class="input-group"><input type="text" class="form-control" name="h_parcel_=@="><span
+                    class="input-group-addon">Cm</span></div>
+        </div>
+    </div>
+  </div>
+  <div class="data-pa" id="pallet_=@=" style="display: block;">
+    <div class="data-items">
+        <div class="btn-group dop2" onclick="fnSetParcel(=@=)"><span class="btn btn-default">&nbsp;</span><span
+                class="btn btn-primary">PALLET</span></div>
+        <div class="data-item"><span class="data-item-span dop">Number of pallets:</span>
+            <div class="input-group"><input type="text" class="form-control" name="n_pallet_=@="><span
+                    class="input-group-addon">Pcs</span></div>
+        </div>
+        <div class="data-item"><span class="data-item-span">Height:</span>
+            <div class="input-group"><input type="text" class="form-control" name="h_pallet_=@="><span
+                    class="input-group-addon">Cm</span></div>
+        </div>
+        <div class="data-item"><span class="data-item-span dop">Weight for pallet:</span>
+            <div class="input-group"><input type="text" class="form-control" name="w_pallet_=@="><span
+                    class="input-group-addon">Cm</span></div>
+        </div>
+    </div></div>
+  </div><!--end section_=@=-->
+</div><!--End template-->
+<script src="js/callsoft.js"></script>
+<script>
+    var arr = [true,false,false];
+    for (var i=1; i<arr.length; i++){
+        fnShowRow(i);
+    }
+
+</script>
+</body>
+</html>
