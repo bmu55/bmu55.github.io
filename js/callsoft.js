@@ -6,7 +6,7 @@ function fnShowRow(i) {
 }
 
 function fnAdd() {
-    fnShowRow(arr.idx);
+    fnShowRow(idx);
     idx++;
 }
 
