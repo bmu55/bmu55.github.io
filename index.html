@@ -14,9 +14,8 @@
     <![endif]-->
     <style>
         .container {
-            max-width: 980px;
             text-align: center;
-            margin: 20px auto;
+            margin: 10px auto;
         }
         .coordinates {
             font-size: 18px;
@@ -38,8 +37,7 @@
         }
 
         .map-overlay {
-            max-width: 600px;
-            height: 400px;
+            height: 600px;
             margin: 0 auto;
             background-color: #fff;
             position: relative;
@@ -47,8 +45,8 @@
         }
 
 #map {
-            max-width: 550px;
-            height: 400px;
+            width: 100%;
+            height: 600px;
             margin: 0 auto;
         }
 
@@ -87,8 +85,8 @@
          // Create a new map and place a marker at the device location.
          var map = new GMaps({
              el: '#map',
-             lat: lat,
-             lng: lng
+             lat: 50.83,
+             lng: 4.39
          });
 
          map.addMarker({
@@ -99,8 +97,8 @@
          });
 
          map.addMarker({
-             lat: 50.8308828,
-             lng: 4.3877332,
+             lat: 50.8309838,
+             lng: 4.3897552,
              title: "Pronto Pizza Etterbeek"
          });
 
