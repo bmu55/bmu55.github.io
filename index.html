@@ -56,7 +56,8 @@
 <div class="container">
 <h1>Map Location</h1>
     <p class="no-browser-support">Sorry, the Geolocation API isn't supported in Your browser.</p>
-    <p class="coordinates">Latitude: <b class="latitude">00</b> Longitude: <b class="longitude">00</b></p>
+    <p class="coordinates">Latitude: <b class="latitude">00</b> Longitude: <b class="longitude">00</b>
+        Delta: <b id="delta">00</b></p>
 
     <div class="map-overlay">
         <div id="map"></div>
@@ -66,7 +67,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWyCb1Xq7gDRWSWRnOAVF3VsBz9TQW-og"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
  <script>
-     var arr1;
+     var lat=0, lng=0, lat_p1=50.8308828, lng_p1=4.3899219, radius=6371, delta=0;
 
      // Check if the browser has support for the Geolocation API
      if (!navigator.geolocation) {
@@ -75,8 +76,8 @@
        navigator.geolocation.getCurrentPosition(function(position) {
 
          // Get the coordinates of the current position.
-         var lat = position.coords.latitude;
-         var lng = position.coords.longitude;
+         lat = position.coords.latitude;
+         lng = position.coords.longitude;
 
          $('.latitude').text(lat.toFixed(3));
          $('.longitude').text(lng.toFixed(3));
@@ -97,28 +98,21 @@
          });
 
          map.addMarker({
-             lat: 50.8308828,
-             lng: 4.3899219,
+             lat: lat_p1,
+             lng: lng_p1,
              title: "Pronto Pizza Etterbeek"
          });
-
-         var oReq = new XMLHttpRequest();
-         oReq.onload = reqListener;
-         console.log("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+lat+","+lng+"&destinations=50.8308828,4.3899219&key=AIzaSyDn6_X7PP9sDlrDzZ8O1pGiKaIRmmy3ltU")
-         oReq.open("GET", "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+lat+","+lng+"&destinations=50.8308828,4.3899219&key=AIzaSyDn6_X7PP9sDlrDzZ8O1pGiKaIRmmy3ltU", true);
-         oReq.send();
-       });
-
+           console.log("l555="+lat+" lp="+lat_p1+"ln="+lng+" lnP="+lng_p1);
+           delta = Math.sin(rad(lat))*Math.sin(rad(lat_p1)) + Math.cos(rad(lat))*Math.cos(rad(lat_p1))*Math.cos(rad(lng-lng_p1));
+           console.log("delta="+delta);
+           delta = Math.acos(delta)*radius;
+           console.log("delta="+delta);
+           $('#delta').text(delta.toFixed(1)+" km.");
+        });
      }
-function reqListener() {
-    try {
-        arr1 = JSON.parse(this.responseText);
-        console.log(arr1);
-    } catch (e) {
-        console.log('this is not JSON ' + e);
-    }
-
-}
+     function rad(gr) {
+         return gr*Math.PI/180
+     }
  </script>
 </body>
 </html>
