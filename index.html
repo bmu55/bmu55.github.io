@@ -66,7 +66,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWyCb1Xq7gDRWSWRnOAVF3VsBz9TQW-og"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
  <script>
-     //var findMeButton = $('.find-me');
+     var arr1;
 
      // Check if the browser has support for the Geolocation API
      if (!navigator.geolocation) {
@@ -85,7 +85,7 @@
          // Create a new map and place a marker at the device location.
          var map = new GMaps({
              el: '#map',
-             lat: 50.83,
+             lat: 50.83, //coordinates Etterbeek
              lng: 4.39
          });
 
@@ -97,14 +97,28 @@
          });
 
          map.addMarker({
-             lat: 50.8309838,
-             lng: 4.3897552,
+             lat: 50.8308828,
+             lng: 4.3899219,
              title: "Pronto Pizza Etterbeek"
          });
 
+         var oReq = new XMLHttpRequest();
+         oReq.onload = reqListener;
+         console.log("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+lat+","+lng+"&destinations=50.8308828,4.3899219&key=AIzaSyDn6_X7PP9sDlrDzZ8O1pGiKaIRmmy3ltU")
+         oReq.open("GET", "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+lat+","+lng+"&destinations=50.8308828,4.3899219&key=AIzaSyDn6_X7PP9sDlrDzZ8O1pGiKaIRmmy3ltU", true);
+         oReq.send();
        });
-     }
 
+     }
+function reqListener() {
+    try {
+        arr1 = JSON.parse(this.responseText);
+        console.log(arr1);
+    } catch (e) {
+        console.log('this is not JSON ' + e);
+    }
+
+}
  </script>
 </body>
 </html>
