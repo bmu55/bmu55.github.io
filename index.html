@@ -39,9 +39,9 @@
         .map-overlay {
             height: 600px;
             margin: 0 auto;
-            background-color: #fff;
             position: relative;
             border-radius: 2px;
+            border: 1px dotted #999;
         }
 
 #map {
@@ -49,73 +49,80 @@
             height: 600px;
             margin: 0 auto;
         }
-
+    .map-container {
+        display: none;
+    }
     </style>
 </head>
 <body>
 <div class="container">
-<h1>Map Location</h1>
-    <p class="no-browser-support">Sorry, the Geolocation API isn't supported in Your browser.</p>
+  <div class="map-container">
+    <h1>Map Location</h1>
     <p class="coordinates">Latitude: <b class="latitude">00</b> Longitude: <b class="longitude">00</b>
         Delta: <b id="delta">00</b></p>
 
     <div class="map-overlay">
         <div id="map"></div>
     </div>
-
+  </div>
+    <p class="no-browser-support">Sorry, We can not automatically determine your location</p>
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWyCb1Xq7gDRWSWRnOAVF3VsBz9TQW-og"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
- <script>
-     var lat=0, lng=0, lat_p1=50.8308828, lng_p1=4.3899219, radius=6371, delta=0;
-     var options = {
-         enableHighAccuracy: true,
-         timeout: 1000,
-         maximumAge: 0
-     };
-     navigator.geolocation.getCurrentPosition(fnSuccess, fnError, options);
+<script>
 
-     function fnSuccess(position) {
-        // Get the coordinates of the current position.
-        lat = position.coords.latitude;
-        lng = position.coords.longitude;
+function fnShowLocation() {
+    var lat=0, lng=0, lat_p1=50.8308828, lng_p1=4.3899219, radius=6371, delta=0;
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 1000,
+        maximumAge: 0
+    };
+    navigator.geolocation.getCurrentPosition(fnSuccess, fnError, options);
+}
 
-        $('.latitude').text(lat.toFixed(3));
-        $('.longitude').text(lng.toFixed(3));
-        $('.coordinates').addClass('visible');
+ function fnSuccess(position) {
+    // Get the coordinates of the current position.
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
 
-        // Create a new map and place a marker at the device location.
-        var map = new GMaps({
-            el: '#map',
-            lat: 50.83, //coordinates Etterbeek
-            lng: 4.39
-        });
+    $('.latitude').text(lat.toFixed(3));
+    $('.longitude').text(lng.toFixed(3));
+    $('.coordinates').addClass('visible');
+    $('.map-container').show();
 
-        map.addMarker({
-            lat: lat,
-            lng: lng,
-            title: "You here",
-            icon: "blue_MarkerA.png"
-        });
+    // Create a new map and place a marker at the device location.
+    var map = new GMaps({
+        el: '#map',
+        lat: 50.83, //coordinates Etterbeek
+        lng: 4.39
+    });
 
-        map.addMarker({
-            lat: lat_p1,
-            lng: lng_p1,
-            title: "Pronto Pizza Etterbeek"
-        });
-        delta = Math.sin(fnR(lat))*Math.sin(fnR(lat_p1)) + Math.cos(fnR(lat))*Math.cos(fnR(lat_p1))*Math.cos(fnR(lng-lng_p1));
-        delta = Math.acos(delta)*radius;
-        $('#delta').text(delta.toFixed(1)+" km.");
-     }
+    map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: "You here",
+        icon: "blue_MarkerA.png"
+    });
 
-     function fnR(gr) { // convert to radian
-         return gr*Math.PI/180
-     }
+    map.addMarker({
+        lat: lat_p1,
+        lng: lng_p1,
+        title: "Pronto Pizza Etterbeek"
+    });
+    delta = Math.sin(fnR(lat))*Math.sin(fnR(lat_p1)) + Math.cos(fnR(lat))*Math.cos(fnR(lat_p1))*Math.cos(fnR(lng-lng_p1));
+    delta = Math.acos(delta)*radius;
+    $('#delta').text(delta.toFixed(1)+" km.");
+ }
 
-     function fnError(err) {
-        $('.no-browser-support').addClass("visible");
-        console.warn('ERROR('+err.code+'):' +err.message);
-     }
+ function fnR(gr) { // convert to radian
+     return gr*Math.PI/180
+ }
+
+ function fnError(err) {
+    $('.no-browser-support').addClass("visible");
+    console.warn('ERROR('+err.code+'):' +err.message);
+ }
 
   </script>
 </body>
