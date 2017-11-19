@@ -266,6 +266,7 @@ function testAPI() {
     var txtReq ="https://maps.googleapis.com/maps/api/distancematrix/json?origins=50.251,28.673&destinations=50.8308828,4.3899219&key=AIzaSyDn6_X7PP9sDlrDzZ8O1pGiKaIRmmy3ltU";
     oReq.onload = reqListener;
     oReq.open("POST", txtReq, true);
+    oReq.setRequestHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
     oReq.send();
 }
 function reqListener() {
