@@ -263,10 +263,9 @@ function fnNext() {
 ////// API Google location
 function testAPI() {
     var oReq = new XMLHttpRequest();
-    var txtReq ="https://maps.googleapis.com/maps/api/distancematrix/json?origins=50.251,28.673&destinations=50.8308828,4.3899219&key=AIzaSyDn6_X7PP9sDlrDzZ8O1pGiKaIRmmy3ltU";
+    var txtReq ="req_geo.php?or="+lat+","+lng+"&ds="+lat_p1+","+lng_p1;
     oReq.onload = reqListener;
-    oReq.open("POST", txtReq, true);
-    oReq.setRequestHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+    oReq.open("GET", txtReq, true);
     oReq.send();
 }
 function reqListener() {
