@@ -264,12 +264,13 @@ function fnNext() {
 function testAPI() {
     var oReq = new XMLHttpRequest();
     var txtReq ="req_geo.php?or="+lat+","+lng+"&ds="+lat_p1+","+lng_p1;
+    alert(txtReq);
     oReq.onload = reqListener;
     oReq.open("GET", txtReq, true);
     oReq.send();
 }
 function reqListener() {
-   alert(this.response.text);
+   alert(JSON.parse(this.responseText));
 }
   </script>
 </body>
