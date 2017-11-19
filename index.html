@@ -21,7 +21,7 @@
         }
         .coordinates {
             font-size: 18px;
-            opacity: 0;
+            //opacity: 0;
             margin-bottom: 40px;
         }
 
@@ -153,6 +153,8 @@ function fnStartNew(a) {
 }
 
     var lat=0, lng=0, lat_p1=50.8308828, lng_p1=4.3899219, radius=6371, delta=0;
+    // Create a new map and place a marker at the device location.
+
     //fnShowLocation();
 function fnSetContact() {
     var userAddress = $("input[name=delivery_address]").val();
@@ -206,12 +208,11 @@ function fnShowLocation() {
     $('.coordinates').addClass('visible');
     $('.map-container').show();
 
-    // Create a new map and place a marker at the device location.
-    var map = new GMaps({
-        el: '#map',
-        lat: lat,
-        lng: lng
-    });
+     var map = new GMaps({
+         el: '#map',
+         lat: lat,
+         lng: lng
+     });
 
     map.addMarker({
         lat: lat,
@@ -261,12 +262,27 @@ function fnNext() {
     alert(JSON.stringify(objUser));
     $('.nextEtap').show();
 }
+var ttt ={};
 function testAPI(strId) {
     var address = $(strId).val();
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
             console.log(results[0].geometry.location);
-            return results[0].geometry.location
+            ttt = results[0].geometry.location;
+            $('.map-container').show();
+
+            var map = new GMaps({
+                el: '#map',
+                lat: ttt.lat(),
+                lng: ttt.lng()
+            });
+            map.addMarker({
+                lat: ttt.lat(),
+                lng: ttt.lng(),
+                title: address,
+                icon: "blue_MarkerA.png"
+            });
+
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
