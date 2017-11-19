@@ -255,7 +255,7 @@ function fnShowLocation() {
      })
  }
 function fnNext() {
-    $('.start').hide();
+    //$('.start').hide();
     alert(JSON.stringify(objUser));
     $('.nextEtap').show();
 }
@@ -270,7 +270,7 @@ function testAPI() {
     oReq.send();
 }
 function reqListener() {
-   alert(JSON.parse(this.responseText));
+   alert(this.responseText);
 }
   </script>
 </body>
