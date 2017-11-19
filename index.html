@@ -104,8 +104,8 @@
     <button type="button" class="btn btn-primary" onclick="fnStartNew(1)">Start</button>
     <button type="button" class="btn btn-primary" onclick="fnStartNew(0)">Очистить localStorage & Start</button>
     </div>
-    <p><br><button type="button" class="btn btn-primary" onclick="testAPI()">testAPI()</button>
-        <input class="form-control" type="text" name="addr1" placeholder="enter address"></p>
+    <p><br><button type="button" class="btn btn-primary" onclick='testAPI("#addr1")'>testAPI()</button>
+        <input class="form-control" type="text" name="addr1" placeholder="enter address" id="addr1"></p>
   <div class="map-container">
     <h1>Map Location</h1>
     <p class="coordinates">Latitude: <b class="latitude">00</b> Longitude: <b class="longitude">00</b>
@@ -261,11 +261,12 @@ function fnNext() {
     alert(JSON.stringify(objUser));
     $('.nextEtap').show();
 }
-function testAPI() {
-    var address = $("input[name=addr1]").val();
+function testAPI(strId) {
+    var address = $(strId).val();
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
-            alert(results[0].geometry.location);
+            console.log(results[0].geometry.location);
+            return results[0].geometry.location
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
