@@ -103,8 +103,9 @@
     <img src="algoritm.png" alt="algoritm"><br>
     <button type="button" class="btn btn-primary" onclick="fnStartNew(1)">Start</button>
     <button type="button" class="btn btn-primary" onclick="fnStartNew(0)">Очистить localStorage & Start</button>
-    <button type="button" class="btn btn-primary" onclick="testAPI()">testAPI()</button>
     </div>
+    <p><br><button type="button" class="btn btn-primary" onclick="testAPI()">testAPI()</button>
+        <input class="form-control" type="text" name="addr1" placeholder="enter address"></p>
   <div class="map-container">
     <h1>Map Location</h1>
     <p class="coordinates">Latitude: <b class="latitude">00</b> Longitude: <b class="longitude">00</b>
@@ -122,6 +123,7 @@
     $('.nextEtap').hide();
     $('.message').hide();
     var test = false, objUser={};
+    var geocoder = new google.maps.Geocoder();
 function fnStartNew(a) {
     $('.nextEtap').hide();
     if (a===0) localStorage.removeItem("userData")
@@ -255,23 +257,21 @@ function fnShowLocation() {
      })
  }
 function fnNext() {
-    //$('.start').hide();
+    $('.start').hide();
     alert(JSON.stringify(objUser));
     $('.nextEtap').show();
 }
-
-////// API Google location
 function testAPI() {
-    var oReq = new XMLHttpRequest();
-    var txtReq ="req_geo.php?or="+lat+","+lng+"&ds="+lat_p1+","+lng_p1;
-    alert(txtReq);
-    oReq.onload = reqListener;
-    oReq.open("GET", txtReq, true);
-    oReq.send();
+    var address = $("input[name=addr1]").val();
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+            alert(results[0].geometry.location);
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
 }
-function reqListener() {
-   alert(this.responseText);
-}
+
   </script>
 </body>
 </html>
